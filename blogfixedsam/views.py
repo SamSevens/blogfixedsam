@@ -1,4 +1,4 @@
-# mysite/views.py
+# blogfixedsam/views.py
 
 from django.http import HttpResponse
 
