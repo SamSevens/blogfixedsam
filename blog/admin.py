@@ -1,4 +1,3 @@
-# blog/admin.py
 from django.contrib import admin
 from . import models
 
@@ -27,7 +26,6 @@ class CommentInline(admin.StackedInline):
 
 
 class PostAdmin(admin.ModelAdmin):
-    """formating the post admin class display"""
     list_display = (
         'title',
         'author',
@@ -46,6 +44,7 @@ class PostAdmin(admin.ModelAdmin):
         'status',
         'topics',
     )
+
     prepopulated_fields = {'slug': ('title',)}
 
     inlines = [

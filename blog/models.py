@@ -1,6 +1,4 @@
-# blog/models
-
-from django.conf import settings
+from django.conf import settings  # Imports Django's loaded settings
 from django.db import models
 from django.utils import timezone
 
@@ -21,7 +19,7 @@ class Topic(models.Model):
     slug = models.SlugField(unique=True)
 
     def __str__(self):
-        return str(self.name)
+        return self.name
 
     class Meta:
         ordering = ['name']
@@ -41,26 +39,31 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(
         null=False,
-        unique_for_date='published',
+        unique_for_date='published',  # Slug is unique for publication date
     )
+
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,  # The Django auth user model
         on_delete=models.PROTECT,  # Prevent posts from being deleted
-        related_name='blog_posts',
-        null=False,
+        related_name='blog_posts',  # "This" on the user model
+        null=False
     )
+
     status = models.CharField(
         max_length=10,
         choices=STATUS_CHOICES,
         default=DRAFT,
         help_text='Set to "published" to make this post publicly visible',
     )
+
     content = models.TextField()
+
     published = models.DateTimeField(
         null=True,
         blank=True,
-        help_text='The date & time this article was published'
+        help_text='The date & time this article was published',
     )
+
     created = models.DateTimeField(auto_now_add=True)  # Sets on create
     updated = models.DateTimeField(auto_now=True)  # Updates on each save
 
@@ -69,20 +72,23 @@ class Post(models.Model):
         related_name='blog_posts'
     )
 
+    objects = PostQuerySet.as_manager()
+
     class Meta:
         ordering = ['-created']
 
     def __str__(self):
-        return str(self.title)
+        return self.title
 
     def publish(self):
         """Publishes this post"""
         self.status = self.PUBLISHED
-        self.published = timezone.now()
+        self.published = timezone.now()  # The current datetime with timezone
+
 
 class Comment(models.Model):
-    name = models.CharField(max_length=100, null=False)
-    email = models.EmailField(max_length=80, null=False)
+    name = models.CharField(max_length=50, null=False)
+    email = models.EmailField(max_length=100, null=False)
     post = models.ForeignKey(Post, related_name='comments', null=False, on_delete=models.CASCADE)
     text = models.TextField(null=False)
     APPROVED = 'approved'
@@ -99,8 +105,8 @@ class Comment(models.Model):
         help_text='Set to "approved" to make this post publicly visible',
         )
 
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now=True)  # Sets on create
+    updated = models.DateTimeField(auto_now=True)  # Updates on each save
 
     class Meta:
         ordering = ['-created']
