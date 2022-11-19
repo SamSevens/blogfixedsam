@@ -6,7 +6,7 @@ import pytest
 from freezegun import freeze_time
 from blog.models import Post
 
-pytestmark = pytest.mark.django_db
+pytestmark = pytest.mark.django_db #able to look at the database
 
 
 def test_published_posts_only_returns_those_with_published_status():

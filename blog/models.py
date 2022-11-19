@@ -4,6 +4,12 @@ from django.utils import timezone
 from django.contrib.auth import get_user_model
 
 
+class TopicQuerySet(models.QuerySet):
+
+    def get_topics(self):
+        return self.filter(self.model.name)
+
+
 class PostQuerySet(models.QuerySet):
     def published(self):
         return self.filter(status=self.model.PUBLISHED)
@@ -29,6 +35,8 @@ class Topic(models.Model):
 
     class Meta:
         ordering = ['name']
+
+    objects = TopicQuerySet.as_manager()
 
 
 class Post(models.Model):

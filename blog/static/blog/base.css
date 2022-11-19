@@ -63,14 +63,23 @@ a:hover {
   font-weight: bold;
 }
 
-/* ... */
+/* Style the main content */
 #main-content {
   margin-top: 1rem;
   display: grid;
   /* The grid has 2 columns. 1 with auto width, the other is 200px wide */
   grid-template-columns: auto 200px;
 }
-/* ... */
+
+#sidebar {
+  height: 100%;
+  width: 150px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 40px;
+  background-color: lightblue;
+}
 
 /* Style the footer */
 #site-footer {
