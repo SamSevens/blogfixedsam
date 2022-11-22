@@ -76,9 +76,8 @@ a:hover {
   width: 150px;
   position: fixed;
   top: 0;
-  right: 0;
+  right: 100px;
   padding-top: 40px;
-
 }
 /* Style the footer */
 #site-footer {
