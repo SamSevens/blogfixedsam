@@ -5,9 +5,8 @@ from django.contrib.auth import get_user_model
 
 
 class TopicQuerySet(models.QuerySet):
-
     def get_topics(self):
-        return self.filter(self.model.name)
+        return self.model.name
 
 
 class PostQuerySet(models.QuerySet):

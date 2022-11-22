@@ -71,16 +71,6 @@ a:hover {
   grid-template-columns: auto 200px;
 }
 
-#sidebar {
-  height: 100%;
-  width: 150px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding-top: 40px;
-  background-color: lightblue;
-}
-
 /* Style the footer */
 #site-footer {
   font-size: 0.9rem;

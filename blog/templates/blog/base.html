@@ -31,21 +31,29 @@
 
   <!-- base.html -->
   <main id="main-content">
+
+    <div>
       {% block main %}
       <!-- Content for the main block will be rendered here -->
        {% endblock %}
+    <div>
 
-       <aside id="sidebar">
-         <section id="author-list">
-           <h3>Authors</h3>
-           <ul>
-             {% for author in authors %}
-               <li>{{ author.get_full_name }}</li>
-             {% endfor %}
-           </ul>
-         </section>
-       </aside>
-     </main>
+        <h3>Authors</h3>
+        <ul>
+          {% for author in authors %}
+            <li>{{ author.get_full_name }}</li>
+          {% endfor %}
+      </ul>
+
+
+          <aside id="sidebar">
+            <section id="author-list">
+              {%for topic in topics%}
+                <h1>{{ topic.name }}</h1>
+              {% endfor %}
+              </section>
+            </aside>
+          </main>
 
   <!-- The footer -->
   <footer id="site-footer">
