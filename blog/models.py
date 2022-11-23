@@ -33,10 +33,14 @@ class Topic(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return "/topics/" + self.slug
+
     class Meta:
         ordering = ['name']
 
     objects = TopicQuerySet.as_manager()
+
 
 
 class Post(models.Model):

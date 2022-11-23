@@ -27,6 +27,7 @@ urlpatterns = [
     path('about/', views.AboutView.as_view(), name='about'),
     path('terms/', views.terms_and_conditions, name='terms-and-conditions'),
     path('posts/', views.PostListView.as_view(), name='post-list'),
+    path('topics/', views.TopicListView.as_view(), name='topic-list'),
     path(
         'posts/<int:year>/<int:month>/<int:day>/<slug:slug>/',
         views.PostDetailView.as_view(),
@@ -36,5 +37,10 @@ urlpatterns = [
         'posts/<int:pk>/',
         views.PostDetailView.as_view(),
         name='post-detail'
+    ),
+    path(
+        'topics/<slug:slug>/',
+        views.TopicDetailView.as_view(),
+        name='topic-detail'
     ),
 ]

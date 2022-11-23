@@ -1,7 +1,6 @@
 # blog/views.py
-
-from django.shortcuts import render
 from django.db.models import Count
+from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.views.generic import ListView
 from django.views.generic import DetailView
@@ -18,16 +17,10 @@ class HomeView(TemplateView):
         latest_posts = models.Post.objects.published() \
             .order_by('-published')[:3]
 
-        authors = models.Post.objects.published() \
-            .get_authors() \
-            .order_by('first_name')
-
-        topics = models.Topic.objects.all().annotate(c=Count('blog_posts')).order_by('-c')[:10]
         # Update the context with our context variables
         context.update({
-            'authors': authors,
-            'latest_posts': latest_posts,
-            'topics': topics
+            'latest_posts': latest_posts
+
         })
 
         return context
@@ -45,6 +38,24 @@ class PostListView(ListView):
     model = models.Post
     context_object_name = 'posts'
     queryset = models.Post.objects.published().order_by('-published')
+
+
+class TopicDetailView(DetailView):
+    model = models.Topic
+
+    # def get_context_data(self):
+    #     context = super().get_context_data()
+    #     queryset = models.Post.objects.all().published().filter(
+    #         topics__slug=self.kwargs['slug']
+    #     )
+    #     context['posts'] = queryset
+
+
+
+class TopicListView(ListView):
+    model = models.Post
+    context_object_name = 'posts'
+    queryset = models.Topic.objects.all().annotate(c=Count('blog_posts')).order_by('name')
 
 
 class PostDetailView(DetailView):
