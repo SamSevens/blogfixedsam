@@ -7,7 +7,7 @@
 {% block main %}
 <h1>Topic {{ object }}</h1>
 
-{% for posts in object.blog_posts.all %}
+{% for post in object.blog_posts.all %}
   {% include "blog/post_preview.html" %}
 {% endfor %}
 
