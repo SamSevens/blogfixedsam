@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-2ickrndt9ywp2x+po-a*60n02*9fn%f!4_pt@vx26#x4l3!k3z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DEBUG', '1'))
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['198.211.110.79', '10.116.0.2']
 
 
 # Application definition
@@ -82,9 +82,14 @@ WSGI_APPLICATION = 'blogfixedsam.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://postgres:postgres@127.0.0.1:5432/blogfixedsam'
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'blogfixedsam',
+        'USER': 'sam',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
 }
 
 
@@ -122,8 +127,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CKEDITOR_UPLOAD_PATH = 'uploads/'
