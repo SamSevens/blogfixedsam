@@ -17,8 +17,10 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-
+from django.conf import settings
+from django.conf.urls.static import static
 from blog import views  # Import the blog views
+from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,6 +30,9 @@ urlpatterns = [
     path('terms/', views.terms_and_conditions, name='terms-and-conditions'),
     path('posts/', views.PostListView.as_view(), name='post-list'),
     path('topics/', views.TopicListView.as_view(), name='topic-list'),
+    path('contest/', views.ContestFormView.as_view(), name='form-contest'),
+    path('contact/', views.ContactFormView.as_view(), name='contact'),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path(
         'posts/<int:year>/<int:month>/<int:day>/<slug:slug>/',
         views.PostDetailView.as_view(),
@@ -43,4 +48,5 @@ urlpatterns = [
         views.TopicDetailView.as_view(),
         name='topic-detail'
     ),
-]
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

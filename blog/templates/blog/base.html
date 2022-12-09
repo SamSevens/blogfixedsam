@@ -13,6 +13,14 @@
 </head>
 
 <body>
+  {% if messages %}
+<div class="django-messages">
+  {% for message in messages %}
+  <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+  {% endfor %}
+</div>
+{% endif %}
+  <div class="wrapper">
   <!-- The header -->
   <header id="site-header">
      <h1>My Blog</h1>
@@ -26,7 +34,9 @@
         <li><a href="{% url "about" %}">About</a></li>
         <li><a href="{% url "post-list" %}">Posts</a></li>
         <li><a href="{% url "topic-list" %}">Topics</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="{% url "form-contest" %}">Photo contest</a></li>
+        <li><a href="{% url "contact" %}">Contact</a></li>
+
       </ul>
     </nav>
 
@@ -62,5 +72,6 @@
     Copyright &copy; {% now 'Y' %} –
     <a href="{% url "terms-and-conditions" %}">Terms & conditions</a>
   </footer>
+ </div>
 </body>
 </html>

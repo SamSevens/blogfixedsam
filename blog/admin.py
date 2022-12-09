@@ -18,6 +18,41 @@ class CommentAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email', 'text')
 
 
+@admin.register(models.Contact)
+class ContactAdmin(admin.ModelAdmin):
+    list_display = (
+        'email',
+        'last_name',
+        'first_name',
+        'submitted'
+    )
+    # Make these fields read-only in the admin
+    readonly_fields = (
+        'first_name',
+        'last_name',
+        'email',
+        'message',
+        'submitted'
+    )
+
+
+@admin.register(models.Contest)
+class ContestAdmin(admin.ModelAdmin):
+    list_display = (
+        'email',
+        'last_name',
+        'first_name',
+        'submitted'
+    )
+    # Make these fields read-only in the admin
+    readonly_fields = (
+        'first_name',
+        'last_name',
+        'email',
+        'photo',
+        'submitted'
+    )
+
 class CommentInline(admin.StackedInline):
     model = models.Comment
     readonly_fields = ('name', 'text', 'email',)

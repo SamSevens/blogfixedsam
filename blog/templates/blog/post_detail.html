@@ -8,7 +8,9 @@
   <h1>{{ post.title }}</h1>
   <span class="published">Published <time>{{ post.published }}</time></span><br>
   <span class="author">{{ post.author.get_full_name }}</span>
-
-  <section class="content">{{ post.content|linebreaks }}</section>
+  {% if post.banner %}
+    <img src="{{ post.banner.url }}" width="100%" alt="Banner image">
+  {% endif %}
+  <section class="content">{{ post.content|safe|linebreaks }}</section>
 </article>
 {% endblock %}
