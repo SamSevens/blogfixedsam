@@ -82,7 +82,7 @@ WSGI_APPLICATION = 'blogfixedsam.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'blogfixedsam',
+        'NAME': 'blog',
         'USER': 'samrosemount',
         'PASSWORD': 'sammathew',
         'HOST': 'localhost',
